@@ -35,12 +35,12 @@ public class SchemaValidation {
         if (receivedMessage.schema_validation && !receivedMessage.technical_validation &&
             !receivedMessage.business_validation) {
             /*
-            Check whether schema_valiation is true as well as if technical_services (previous) 
-            and business_validation (next) are false. If so it's ready to be processed.
+            Check whether schema_valiation is true as well as if technical_validation (previous) 
+            and trade_enrichment (next) are false. If so it's ready to be processed.
             We flip the boolean value to indicate that this service has processed it and ready for the next step. 
             */
             receivedMessage.schema_validation = false;
-            receivedMessage.business_validation = true;
+            receivedMessage.trade_enrichment = true;
         
             return Flowable.just(receivedMessage);
         }
