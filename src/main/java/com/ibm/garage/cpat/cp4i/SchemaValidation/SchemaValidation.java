@@ -33,7 +33,7 @@ public class SchemaValidation {
         LOGGER.info("Message received from topic = {}", receivedMessage);
 
         if (receivedMessage.schema_validation && !receivedMessage.technical_validation &&
-            !receivedMessage.business_validation) {
+            !receivedMessage.trade_enrichment) {
             /*
             Check whether schema_valiation is true as well as if technical_validation (previous) 
             and trade_enrichment (next) are false. If so it's ready to be processed.
