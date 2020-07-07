@@ -39,7 +39,7 @@ public class SchemaValidation {
             We flip the boolean value to indicate that this service has processed it and ready for the next step. 
             */
             receivedMessage.schema_validation = false;
-            receivedMessage.trade_enrichment = true;
+            //receivedMessage.trade_enrichment = true;
         
             return Flowable.just(receivedMessage);
         }
