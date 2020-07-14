@@ -32,15 +32,19 @@ public class SchemaValidation {
 
         LOGGER.info("Message received from topic = {}", receivedMessage);
 
-        if (receivedMessage.schema_validation && !receivedMessage.technical_validation) {
+        if (receivedMessage.schema_validation && !receivedMessage.technical_validation && 
+            !receivedMessage.compliance_services) {
             /*
             Check whether schema_valiation is true as well as if technical_validation (previous) 
             and trade_enrichment (next) are false. If so it's ready to be processed.
             We flip the boolean value to indicate that this service has processed it and ready for the next step. 
             */
             receivedMessage.schema_validation = false;
-            //receivedMessage.trade_enrichment = true;
-        
+
+            if (!receivedMessage.trade_enrichment) {
+                receivedMessage.trade_enrichment = true;
+            }
+            
             return Flowable.just(receivedMessage);
         }
 
